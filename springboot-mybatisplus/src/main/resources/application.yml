@@ -1,0 +1,15 @@
+server:
+  port: 1018
+
+# 配置mybatis-plus
+mybatis-plus:
+  # 配置扫描xml
+  mapper-locations:
+    - classpath:mapper/*.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.ahut.entity
+  global-config:
+    # 逻辑删除配置
+    logic-delete-value: 0
+    logic-not-delete-value: 1
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
