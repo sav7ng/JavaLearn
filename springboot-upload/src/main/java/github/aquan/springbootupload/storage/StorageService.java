@@ -1,13 +1,13 @@
 package github.aquan.springbootupload.storage;
 
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-@Service
+@Component
 public interface StorageService  {
 
     void init();

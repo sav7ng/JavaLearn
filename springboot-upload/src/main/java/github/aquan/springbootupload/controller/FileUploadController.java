@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 /**
@@ -24,12 +25,13 @@ public class FileUploadController {
 
     private final StorageService storageService;
 
+    @Autowired
     public FileUploadController(StorageService storageService) {
         this.storageService = storageService;
     }
 
     @GetMapping("/")
-    public String listUploadedFiles(Model model) {
+    public String listUploadedFiles(Model model) throws IOException {
         model.addAttribute("files", storageService.loadAll()
                                                      .map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class, "serveFile", path.getFileName().toString())
                                                                                          .build().toString())

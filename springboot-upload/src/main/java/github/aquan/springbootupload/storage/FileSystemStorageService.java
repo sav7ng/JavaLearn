@@ -1,9 +1,9 @@
 package github.aquan.springbootupload.storage;
 
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 /**
@@ -20,24 +21,17 @@ import java.util.stream.Stream;
  * @Date 2019.3.12 10:57
  * @Version 1.0
  **/
+
+@Service
 public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
 
     @Autowired
-    public FileSystemStorageService(Path rootLocation) {
-        this.rootLocation = rootLocation;
+    public FileSystemStorageService(StorageProperties properties) {
+        this.rootLocation = Paths.get(properties.getLocation());
     }
 
-
-    @Override
-    public void init() {
-        try {
-            Files.createDirectory(rootLocation);
-        } catch (IOException e) {
-            throw new StorageException("Could not initialize storage", e);
-        }
-    }
 
     @Override
     public void store(MultipartFile file) {
@@ -48,7 +42,7 @@ public class FileSystemStorageService implements StorageService {
             }
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
 
     }
@@ -93,4 +87,14 @@ public class FileSystemStorageService implements StorageService {
          **/
 
     }
+
+    @Override
+    public void init() {
+        try {
+            Files.createDirectory(rootLocation);
+        } catch (IOException e) {
+            throw new StorageException("Could not initialize storage", e);
+        }
+    }
+
 }
