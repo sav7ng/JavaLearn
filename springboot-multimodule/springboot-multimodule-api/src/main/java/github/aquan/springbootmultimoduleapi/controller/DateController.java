@@ -1,4 +1,4 @@
-package github.aquan.springbootmultimoduleapi.controller;
+﻿package github.aquan.springbootmultimoduleapi.controller;
 
 import github.aquan.springbootmultimoduleutils.helper.CommonMethod;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class DateController {
         Date date = CommonMethod.getCurDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        return "当前时间：" + simpleDateFormat.format(date);
+        return "Aquan当前时间：" + simpleDateFormat.format(date);
     }
 
 }
