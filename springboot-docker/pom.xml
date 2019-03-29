@@ -42,10 +42,11 @@
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>1.2.0</version>
+				<version>0.4.13</version>
 				<configuration>
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
+					<dockerHost>http://139.199.161.130:2375</dockerHost>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
