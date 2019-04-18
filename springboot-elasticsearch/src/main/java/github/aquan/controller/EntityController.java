@@ -2,6 +2,9 @@ package github.aquan.controller;
 
 import github.aquan.entity.Entity;
 import github.aquan.service.TestService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,10 @@ public class EntityController {
     @Autowired
     TestService cityESService;
 
+    @ApiOperation(value="保存City", notes="saveCity")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id", value="城市ID", required=true, dataType="Long"),
+            @ApiImplicitParam(name="cityName", value="城市名称", required=true, dataType="String")})
     @RequestMapping(value="/save", method=RequestMethod.GET)
     public String save(long id, String name) {
         System.out.println("save_Api");
@@ -39,6 +46,8 @@ public class EntityController {
         }
     }
 
+    @ApiOperation(value="查询City", notes="searchCity")
+    @ApiImplicitParam(name="cityName", value="城市名称", required = true, dataType = "String")
     @RequestMapping(value="/search", method=RequestMethod.GET)
     public List<Entity> save(String name) {
         List<Entity> entityList = null;
