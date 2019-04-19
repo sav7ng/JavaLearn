@@ -6,3 +6,8 @@ spring:
     jest:
       uris: http://127.0.0.1:9200
       read-timeout: 5s
+
+ #java.lang.NumberFormatException: For input string: ""
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error

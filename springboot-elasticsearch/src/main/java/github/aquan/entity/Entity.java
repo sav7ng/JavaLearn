@@ -1,5 +1,8 @@
 package github.aquan.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +12,7 @@ import java.io.Serializable;
  * @Date 2019.4.17 17:44
  * @Version 1.0
  **/
+@ApiModel(description="城市")
 public class Entity implements Serializable {
 
     private static final long serialVersionUID = -763638353551774166L;
@@ -17,8 +21,10 @@ public class Entity implements Serializable {
 
     public static final String TYPE = "tstype";
 
+    @ApiModelProperty(value = "城市ID")
     private Long id;
 
+    @ApiModelProperty(value = "城市名称")
     private String name;
 
     public Entity() {
