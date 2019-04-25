@@ -44,7 +44,7 @@ public class EntityController {
         }
     }
 
-    @RequestMapping(value="/search", method=RequestMethod.GET)
+    @GetMapping(value="/search")
     @ApiOperation(value="查询City", notes="searchCity")
     @ApiImplicitParam(name="cityName", value="城市名称", required = true, dataType = "string")
     public List<Entity> search(String cityName) {
@@ -55,64 +55,71 @@ public class EntityController {
         return entityList;
     }
 
-    @GetMapping("/savev2")
-    @ApiOperation(value="保存City", notes="saveCity")
+    @DeleteMapping(value = "/delete")
+    @ApiOperation(value = "根据城市ID删除数据", notes="deleteCity")
+    @ApiImplicitParam(name = "cityId", value = "城市ID", required = true, dataType = "string")
+    public String delete(@RequestParam(value="cityId", required = true) String id) {
+        return cityESService.deleteEntity(id) ? "删除成功" : "删除失败" ;
+    }
+
+    // @GetMapping("/savev2")
+    // @ApiOperation(value="保存City", notes="saveCity")
+    // // @ApiImplicitParams({
+    // //         @ApiImplicitParam(name="id", value="城市ID", required=true, dataType="long"),
+    // //         @ApiImplicitParam(name="cityName", value="城市名称", required=true, dataType="string")})
+    // public String savev2(@RequestParam(value="id", required=true) long id,
+    //                      @RequestParam(value="cityName", required=true) String cityName) {
+    //     System.out.println("save_Api");
+    //     if(id>0 && StringUtils.isNotEmpty(cityName)) {
+    //         Entity newEntity = new Entity(id, cityName);
+    //         List<Entity> addList = new ArrayList<Entity>();
+    //         addList.add(newEntity);
+    //         cityESService.saveEntity(addList);
+    //         return "OK";
+    //     }else {
+    //         return "Bad input value";
+    //     }
+    // }
+    //
+    // @GetMapping("/searchv2")
+    // @ApiOperation(value="查询City", notes="searchCity")
+    // // @ApiImplicitParam(name="cityName", value="城市名称", required = true, dataType = "string")
+    // public List<Entity> searchv2(@RequestParam(value="cityName", required=true) String cityName) {
+    //     List<Entity> entityList = null;
+    //     if(StringUtils.isNotEmpty(cityName)) {
+    //         entityList = cityESService.searchEntity(cityName);
+    //     }
+    //     return entityList;
+    // }
+    //
+    // @GetMapping("/savev3")
+    // @ApiOperation(value="保存City", notes="saveCity")
     // @ApiImplicitParams({
     //         @ApiImplicitParam(name="id", value="城市ID", required=true, dataType="long"),
-    //         @ApiImplicitParam(name="cityName", value="城市名称", required=true, dataType="string")})
-    public String savev2(@RequestParam(value="id", required=true) long id,
-                         @RequestParam(value="cityName", required=true) String cityName) {
-        System.out.println("save_Api");
-        if(id>0 && StringUtils.isNotEmpty(cityName)) {
-            Entity newEntity = new Entity(id, cityName);
-            List<Entity> addList = new ArrayList<Entity>();
-            addList.add(newEntity);
-            cityESService.saveEntity(addList);
-            return "OK";
-        }else {
-            return "Bad input value";
-        }
-    }
-
-    @GetMapping("/searchv2")
-    @ApiOperation(value="查询City", notes="searchCity")
-    // @ApiImplicitParam(name="cityName", value="城市名称", required = true, dataType = "string")
-    public List<Entity> searchv2(@RequestParam(value="cityName", required=true) String cityName) {
-        List<Entity> entityList = null;
-        if(StringUtils.isNotEmpty(cityName)) {
-            entityList = cityESService.searchEntity(cityName);
-        }
-        return entityList;
-    }
-
-    @GetMapping("/savev3")
-    @ApiOperation(value="保存City", notes="saveCity")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="id", value="城市ID", required=true, dataType="long"),
-            @ApiImplicitParam(name="city", value="城市名称", required=true, dataType="string")})
-    public String savev3(@RequestParam(value="id", required=true) long id,
-                         @RequestParam(value="city", required=true) String cityName) {
-        System.out.println("save_Api");
-        if(id>0 && StringUtils.isNotEmpty(cityName)) {
-            Entity newEntity = new Entity(id, cityName);
-            List<Entity> addList = new ArrayList<Entity>();
-            addList.add(newEntity);
-            cityESService.saveEntity(addList);
-            return "OK";
-        }else {
-            return "Bad input value";
-        }
-    }
-
-    @GetMapping("/searchv3")
-    @ApiOperation(value="查询City", notes="searchCity")
-    @ApiImplicitParam(name="city", value="城市名称", required = true, dataType = "string")
-    public List<Entity> searchv3(@RequestParam(value="city", required=true) String cityName) {
-        List<Entity> entityList = null;
-        if(StringUtils.isNotEmpty(cityName)) {
-            entityList = cityESService.searchEntity(cityName);
-        }
-        return entityList;
-    }
+    //         @ApiImplicitParam(name="city", value="城市名称", required=true, dataType="string")})
+    // public String savev3(@RequestParam(value="id", required=true) long id,
+    //                      @RequestParam(value="city", required=true) String cityName) {
+    //     System.out.println("save_Api");
+    //     if(id>0 && StringUtils.isNotEmpty(cityName)) {
+    //         Entity newEntity = new Entity(id, cityName);
+    //         List<Entity> addList = new ArrayList<Entity>();
+    //         addList.add(newEntity);
+    //         cityESService.saveEntity(addList);
+    //         return "OK";
+    //     }else {
+    //         return "Bad input value";
+    //     }
+    // }
+    //
+    // @GetMapping("/searchv3")
+    // @ApiOperation(value="查询City", notes="searchCity")
+    // @ApiImplicitParam(name="city", value="城市名称", required = true, dataType = "string")
+    // public List<Entity> searchv3(@RequestParam(value="city", required=true) String cityName) {
+    //     List<Entity> entityList = null;
+    //     if(StringUtils.isNotEmpty(cityName)) {
+    //         entityList = cityESService.searchEntity(cityName);
+    //     }
+    //     return entityList;
+    // }
 
 }

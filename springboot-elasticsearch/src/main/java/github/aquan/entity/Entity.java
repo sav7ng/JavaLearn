@@ -1,5 +1,6 @@
 package github.aquan.entity;
 
+import io.searchbox.annotations.JestId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -21,6 +22,8 @@ public class Entity implements Serializable {
 
     public static final String TYPE = "tstype";
 
+    //加上@JestId可以使在插入index时候让_id与id对应，方便日后操作CRUD
+    @JestId
     @ApiModelProperty(value = "城市ID")
     private Long id;
 

@@ -12,4 +12,6 @@ public interface TestService {
 
     List<Entity> searchEntity(String searchContent);
 
+    boolean deleteEntity(String id);
+
 }

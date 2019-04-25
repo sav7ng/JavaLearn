@@ -2,16 +2,15 @@ package github.aquan.service.impl;
 
 import github.aquan.entity.Entity;
 import github.aquan.service.TestService;
+import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
-import io.searchbox.core.Bulk;
-import io.searchbox.core.Index;
-import io.searchbox.core.Search;
+import io.searchbox.core.*;
+import io.searchbox.indices.ClearCache;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import io.searchbox.client.JestClient;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -62,6 +61,8 @@ public class TestServiceImpl implements TestService {
             e.printStackTrace();
             LOGGER.error(e.getMessage());
         }
+
+        ClearCache clearCache = new ClearCache.Builder().build();
     }
 
     /**
@@ -86,4 +87,38 @@ public class TestServiceImpl implements TestService {
         }
         return null;
     }
+
+    /**
+     * 刪除ES中ID匹配的数据
+     **/
+    @Override
+    public boolean deleteEntity(String id) {
+
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(QueryBuilders.matchQuery("id",id));
+        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(Entity.INDEX_NAME).addType(Entity.TYPE).build();
+
+
+        Delete delete = new Delete.Builder(id).index(Entity.INDEX_NAME).type(Entity.TYPE).build();
+        DocumentResult result = null;
+        try {
+            result = jestClient.execute(delete);
+
+            JestResult result1 = jestClient.execute(search);
+            System.out.println(result1);
+            LOGGER.info("deleteEntity resp: {}", result.getJsonString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error(e.getMessage());
+        }
+        if (result.isSucceeded()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
 }
