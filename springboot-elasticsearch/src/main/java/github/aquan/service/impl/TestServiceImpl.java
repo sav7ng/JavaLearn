@@ -93,19 +93,10 @@ public class TestServiceImpl implements TestService {
      **/
     @Override
     public boolean deleteEntity(String id) {
-
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.matchQuery("id",id));
-        Search search = new Search.Builder(searchSourceBuilder.toString()).addIndex(Entity.INDEX_NAME).addType(Entity.TYPE).build();
-
-
         Delete delete = new Delete.Builder(id).index(Entity.INDEX_NAME).type(Entity.TYPE).build();
         DocumentResult result = null;
         try {
             result = jestClient.execute(delete);
-
-            JestResult result1 = jestClient.execute(search);
-            System.out.println(result1);
             LOGGER.info("deleteEntity resp: {}", result.getJsonString());
         } catch (Exception e) {
             e.printStackTrace();
