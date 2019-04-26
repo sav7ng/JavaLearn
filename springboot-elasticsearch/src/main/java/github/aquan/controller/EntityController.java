@@ -59,7 +59,13 @@ public class EntityController {
     @ApiOperation(value = "根据城市ID删除数据", notes="deleteCity")
     @ApiImplicitParam(name = "cityId", value = "城市ID", required = true, dataType = "string")
     public String delete(@RequestParam(value="cityId", required = true) String id) {
-        return cityESService.deleteEntity(id) ? "删除成功" : "删除失败" ;
+        return cityESService.deleteEntity(id) ? "删除成功" : "删除失败";
+    }
+
+    @PostMapping(value = "/update")
+    @ApiOperation(value = "更新城市数据", notes="updateCity")
+    public String update(@RequestBody Entity entity) {
+        return cityESService.updateEntity(entity) ? "更新成功" : "更新失败";
     }
 
     // @GetMapping("/savev2")

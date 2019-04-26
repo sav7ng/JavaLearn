@@ -14,4 +14,6 @@ public interface TestService {
 
     boolean deleteEntity(String id);
 
+    boolean updateEntity(Entity entity);
+
 }

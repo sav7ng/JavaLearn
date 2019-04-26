@@ -1,5 +1,6 @@
 package github.aquan.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import github.aquan.entity.Entity;
 import github.aquan.service.TestService;
 import io.searchbox.client.JestClient;
@@ -109,7 +110,21 @@ public class TestServiceImpl implements TestService {
         }
     }
 
-
+    @Override
+    public boolean updateEntity(Entity entity) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("city", entity);
+        Update update = new Update.Builder(jsonObject.toJSONString()).index(Entity.INDEX_NAME).type(Entity.TYPE).id(entity.getId() + "").build();
+        try {
+            JestResult result = jestClient.execute(update);
+            LOGGER.info(result.getJsonString());
+            return result.isSucceeded();
+        } catch (IOException e) {
+            e.printStackTrace();
+            LOGGER.error("updateByDocId fail. msg:{}", e.getMessage());
+        }
+        return false;
+    }
 
 
 }
