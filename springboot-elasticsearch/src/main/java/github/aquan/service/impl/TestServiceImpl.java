@@ -113,7 +113,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public boolean updateEntity(Entity entity) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("city", entity);
+        jsonObject.put("doc", entity);
         Update update = new Update.Builder(jsonObject.toJSONString()).index(Entity.INDEX_NAME).type(Entity.TYPE).id(entity.getId() + "").build();
         try {
             JestResult result = jestClient.execute(update);
