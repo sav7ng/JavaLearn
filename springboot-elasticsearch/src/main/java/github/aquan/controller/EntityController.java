@@ -44,6 +44,12 @@ public class EntityController {
         }
     }
 
+    @PostMapping(value="/saveList")
+    @ApiOperation(value="批量保存City", notes="saveListCity")
+    public String save(@RequestBody List<Entity> entityList) {
+        return cityESService.saveEntity(entityList) ? "批量导入成功" : "批量导入失败";
+    }
+
     @GetMapping(value="/search")
     @ApiOperation(value="查询City", notes="searchCity")
     @ApiImplicitParam(name="cityName", value="城市名称", required = true, dataType = "string")

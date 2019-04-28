@@ -6,7 +6,6 @@ import github.aquan.service.TestService;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.*;
-import io.searchbox.indices.ClearCache;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
@@ -49,7 +48,7 @@ public class TestServiceImpl implements TestService {
      * 批量保存内容到ES
      **/
     @Override
-    public void saveEntity(List<Entity> entityList) {
+    public boolean saveEntity(List<Entity> entityList) {
         Bulk.Builder bulk = new Bulk.Builder();
         for(Entity entity : entityList) {
             Index index = new Index.Builder(entity).index(Entity.INDEX_NAME).type(Entity.TYPE).build();
@@ -58,12 +57,13 @@ public class TestServiceImpl implements TestService {
         try {
             jestClient.execute(bulk.build());
             LOGGER.info("ES-插入完成");
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             LOGGER.error(e.getMessage());
+            return false;
         }
-
-        ClearCache clearCache = new ClearCache.Builder().build();
+        // ClearCache clearCache = new ClearCache.Builder().build();
     }
 
     /**
@@ -110,6 +110,9 @@ public class TestServiceImpl implements TestService {
         }
     }
 
+    /**
+     * ES更新数据
+     **/
     @Override
     public boolean updateEntity(Entity entity) {
         JSONObject jsonObject = new JSONObject();

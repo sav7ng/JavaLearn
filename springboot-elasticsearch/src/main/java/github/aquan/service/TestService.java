@@ -8,7 +8,7 @@ public interface TestService {
 
     void saveEntity(Entity entity);
 
-    void saveEntity(List<Entity> entityList);
+    boolean saveEntity(List<Entity> entityList);
 
     List<Entity> searchEntity(String searchContent);
 
