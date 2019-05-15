@@ -1,0 +1,17 @@
+server:
+  port: 8089
+
+#mysql
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/halodb?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:com/github/aquan/mapper/xml/*.xml
+  type-aliases-package: com.github.aquan.entity
+
+
+

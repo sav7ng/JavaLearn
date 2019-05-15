@@ -13,3 +13,7 @@ eureka:
 spring:
   application:
     name: eurka-server
+  security:
+    user:
+      name: aquan
+      password:  aquan
