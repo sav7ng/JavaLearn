@@ -5,8 +5,24 @@
 <mapper namespace="com.deepexi.a.mapper.ProductMapper">
     <!--id与dao接口的方法名一直，指定结果类型，和参数类型 -->
 
-    <select id="selectPageVo" resultType="com.deepexi.a.domain.eo.Product">
-        SELECT * FROM product WHERE price > #{price}
-    </select>
+    <!--<select id="selectPageVo" resultType="com.deepexi.a.domain.eo.Product">-->
+        <!--SELECT * FROM product WHERE price > #{price}-->
+    <!--</select>-->
+
+
+    <!--<update id="updateProductById" parameterType="com.deepexi.a.domain.eo.Product">-->
+        <!--update product-->
+        <!--<set>-->
+            <!--`id` = #{id},-->
+            <!--`name` = #{name},-->
+            <!--`price` = #{price},-->
+            <!--`tenant_id` = #{tenant_id},-->
+            <!--`created_by` = #{created_by},-->
+            <!--`updated_by` = #{updated_by},-->
+            <!--`dr` = #{dr},-->
+            <!--`updated_by` = sysdate()-->
+        <!--</set>-->
+        <!--where id = #{upid}-->
+    <!--</update>-->
 
 </mapper>

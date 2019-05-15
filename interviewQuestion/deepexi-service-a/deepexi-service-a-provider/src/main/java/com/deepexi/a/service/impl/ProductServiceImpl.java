@@ -1,10 +1,10 @@
 package com.deepexi.a.service.impl;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.deepexi.a.service.ProductService;
 import com.deepexi.a.domain.eo.Product;
 import com.deepexi.a.extension.ApplicationException;
 import com.deepexi.a.mapper.ProductMapper;
+import com.deepexi.a.service.ProductService;
 import com.deepexi.util.pageHelper.PageBean;
 import com.github.pagehelper.PageHelper;
 import org.slf4j.Logger;
@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by donh on 2018/11/6.
@@ -66,4 +68,16 @@ public class ProductServiceImpl implements ProductService {
     public void testError() {
         throw new ApplicationException("100", "测试异常");
     }
+
+
+    /**
+     * 根据ID更新数据
+     **/
+    @Override
+    public Integer updateProductById(String upid, String name) {
+
+        return productMapper.updateProductById(upid, name);
+    }
+
+
 }

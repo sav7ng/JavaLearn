@@ -2,12 +2,12 @@ package com.deepexi.a.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.deepexi.a.extension.ApplicationException;
-import com.deepexi.a.service.ProductService;
 import com.deepexi.a.depend.DemoClient;
 import com.deepexi.a.domain.eo.Product;
+import com.deepexi.a.extension.ApplicationException;
+import com.deepexi.a.service.ProductService;
 import com.deepexi.util.config.Payload;
-
+import feign.Param;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -56,9 +56,16 @@ public class ProductController {
         return new Payload(productService.createProduct(product));
     }
 
-    @PutMapping("/{id:[a-zA-Z0-9]+}")
-    public Payload updateProductById(@PathVariable("id") String id, Product product) {
-        return new Payload(null);
+    @PutMapping("/{upid:[a-zA-Z0-9]+}")
+    public Payload updateProductById(@PathVariable("upid") String upid, @RequestParam("name") String name) {
+        // return new Payload(productService.updateProductById(id, product));
+        // productService.updateProductById(id, product);
+        Integer updateProductById = productService.updateProductById(upid, name);
+        if (updateProductById > 0) {
+            return new Payload(updateProductById);
+        } else {
+            return new Payload("修改失败！");
+        }
     }
 
     @DeleteMapping("/{id:[a-zA-Z0-9]+}")
