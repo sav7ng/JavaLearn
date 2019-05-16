@@ -2,12 +2,12 @@ package com.deepexi.a.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.fastjson.JSONArray;
 import com.deepexi.a.depend.DemoClient;
 import com.deepexi.a.domain.eo.Product;
 import com.deepexi.a.extension.ApplicationException;
 import com.deepexi.a.service.ProductService;
 import com.deepexi.util.config.Payload;
-import feign.Param;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by donh on 2018/11/5.
@@ -57,10 +59,15 @@ public class ProductController {
     }
 
     @PutMapping("/{upid:[a-zA-Z0-9]+}")
-    public Payload updateProductById(@PathVariable("upid") String upid, @RequestParam("name") String name) {
+    public Payload updateProductById(@PathVariable("upid") String upid,
+                                     @RequestParam("name") String name,
+                                     @RequestParam("price") Integer price) {
         // return new Payload(productService.updateProductById(id, product));
         // productService.updateProductById(id, product);
-        Integer updateProductById = productService.updateProductById(upid, name);
+        Product product = new Product();
+        product.setName(name);
+        product.setPrice(price);
+        Integer updateProductById = productService.updateProductById(upid, product);
         if (updateProductById > 0) {
             return new Payload(updateProductById);
         } else {
@@ -68,10 +75,13 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/{id:[a-zA-Z0-9]+}")
-    public Payload deleteProductById(@PathVariable("id") String id) {
-        return new Payload(productService.deleteProductById(id));
+    // @DeleteMapping("/{id:[a-zA-Z0-9]+}")
+    @DeleteMapping("/deleteProductByIds")
+    @ApiOperation(value="删除Product", notes="deleteProductByIds")
+    public Payload deleteProductByIds(@RequestParam("productIds") List<String> ids) {
+        return new Payload(productService.deleteProductByIds(ids));
     }
+
 
     @GetMapping("/testError")
     public Payload testError() {

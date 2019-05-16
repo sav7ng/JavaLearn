@@ -2,6 +2,7 @@ package com.deepexi.a.domain.eo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 
+
 @TableName("product")
 public class Product extends SuperEntity {
 

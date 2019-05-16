@@ -13,9 +13,18 @@
     <!--<update id="updateProductById" parameterType="com.deepexi.a.domain.eo.Product">-->
         <!--update product-->
         <!--<set>-->
+            <!--`name` = #{product.name},-->
+            <!--`price` = #{product.price}-->
+        <!--</set>-->
+        <!--where id = #{upid}-->
+    <!--</update>-->
+
+    <!--<update id="updateProductById" parameterType="com.deepexi.a.domain.eo.Product">-->
+        <!--update product-->
+        <!--<set>-->
             <!--`id` = #{id},-->
-            <!--`name` = #{name},-->
-            <!--`price` = #{price},-->
+            <!--`name` = #{product.name},-->
+            <!--`price` = #{product.price},-->
             <!--`tenant_id` = #{tenant_id},-->
             <!--`created_by` = #{created_by},-->
             <!--`updated_by` = #{updated_by},-->

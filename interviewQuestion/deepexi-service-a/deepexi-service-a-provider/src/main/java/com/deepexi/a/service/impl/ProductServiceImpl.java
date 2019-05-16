@@ -37,8 +37,10 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.insert(product);
     }
 
-    public Boolean deleteProductById(String id) {
-        productMapper.deleteById(id);
+    public Boolean deleteProductByIds(List<String> ids) {
+
+        // productMapper.deleteById(id);
+        productMapper.deleteBatchIds(ids);
         return true;
     }
 
@@ -74,9 +76,9 @@ public class ProductServiceImpl implements ProductService {
      * 根据ID更新数据
      **/
     @Override
-    public Integer updateProductById(String upid, String name) {
+    public Integer updateProductById(String upid, Product product) {
 
-        return productMapper.updateProductById(upid, name);
+        return productMapper.updateProductById(upid, product);
     }
 
 
