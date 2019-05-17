@@ -27,9 +27,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
-    public PageBean getProductList(Integer page, Integer size, Integer age) {
+    public PageBean getProductList(Integer page, Integer size, Integer age, String name) {
         PageHelper.startPage(page, size);
-        List<Product> userTasks = productMapper.selectPageVo(age);
+        List<Product> userTasks = productMapper.selectPageVo(age, name);
         return new PageBean<>(userTasks);
     }
 

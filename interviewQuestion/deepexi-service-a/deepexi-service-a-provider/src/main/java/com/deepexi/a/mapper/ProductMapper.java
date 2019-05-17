@@ -13,8 +13,8 @@ import java.util.List;
  */
 public interface ProductMapper extends BaseMapper<Product> {
 
-    @Select("SELECT * FROM product p WHERE p.price > #{price}")
-    List<Product> selectPageVo(@Param("price") Integer price);
+    @Select("SELECT * FROM product p WHERE p.price >= #{price} and p.name like '%${name}%'")
+    List<Product> selectPageVo(@Param("price") Integer price, @Param("name") String name);
 
     // @Update("update product set name = #{product.name}, price = #{product.price} where id = #{upid}")
     // Integer updateProductById(@Param("upid") String upid, Product product);

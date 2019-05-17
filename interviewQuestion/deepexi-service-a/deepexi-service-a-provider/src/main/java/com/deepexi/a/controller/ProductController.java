@@ -39,13 +39,14 @@ public class ProductController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page",value = "第几页",required = false,dataType = "Integer"),
             @ApiImplicitParam(name = "size",value = "每页查询数",required = false,dataType = "Integer"),
-            @ApiImplicitParam(name = "price",value = "价格",required = false,dataType = "Integer")
-    })
+            @ApiImplicitParam(name = "price",value = "价格",required = false,dataType = "Integer"),
+            @ApiImplicitParam(name = "name",value = "名字",required = false,dataType = "String")})
     @GetMapping
     public Payload getProductList(@RequestParam(name = "page", required = false, defaultValue = "1") Integer page,
                                   @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
-                                  @RequestParam(name = "price", required = false, defaultValue = "0") Integer price) {
-        return new Payload(productService.getProductList(page, size, price));
+                                  @RequestParam(name = "price", required = false, defaultValue = "0") Integer price,
+                                  @RequestParam(name = "name", required = false, defaultValue = "") String name) {
+        return new Payload(productService.getProductList(page, size, price, name));
     }
 
     @GetMapping("/{id:[a-zA-Z0-9]+}")

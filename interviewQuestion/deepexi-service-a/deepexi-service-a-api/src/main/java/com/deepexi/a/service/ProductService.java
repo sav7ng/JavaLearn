@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface ProductService {
 
-    PageBean getProductList(Integer page, Integer size, Integer price);
+    PageBean getProductList(Integer page, Integer size, Integer price, String name);
 
     Product getProductById(String id);
 
