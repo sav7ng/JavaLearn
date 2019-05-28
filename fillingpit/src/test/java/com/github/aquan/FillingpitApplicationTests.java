@@ -34,9 +34,6 @@ public class FillingpitApplicationTests {
         System.out.println(result);
 
         System.out.println(d1-d2);
-
-
-        StrictMath.PI
     }
 
     @Test
@@ -48,5 +45,21 @@ public class FillingpitApplicationTests {
         System.out.println("**********************");
     }
 
+
+    @Test
+    public void bitOperation(){
+        int a=15;   //二进制：1111
+        int b=2;    //二进制：0010
+
+        /*a	1	1	1	1	15
+        b	0	0	1	0	2
+        a&b	0	0	1	0	2
+        a|b	1	1	1	1	15
+        a^b	1	1	0	1	13*/
+
+        System.out.println(a+"&"+b+"="+(a&b));
+        System.out.println(a+"|"+b+"="+(a|b));
+        System.out.println(a+"^"+b+"="+(a^b));
+    }
 
 }
