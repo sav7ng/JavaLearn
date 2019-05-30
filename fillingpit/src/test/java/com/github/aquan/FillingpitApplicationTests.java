@@ -7,6 +7,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -60,6 +62,35 @@ public class FillingpitApplicationTests {
         System.out.println(a+"&"+b+"="+(a&b));
         System.out.println(a+"|"+b+"="+(a|b));
         System.out.println(a+"^"+b+"="+(a^b));
+    }
+
+    @Test
+    public void day(){
+        Date date = new Date();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        System.out.println(calendar.getTime());
+    }
+
+    @Test
+    public void subString(){
+        String greeting = "Hello";
+        String s = greeting.substring(0, 3);
+        String s1 = greeting.substring(0);
+        System.out.println(s);
+        System.out.println(s1);
+
+        greeting = greeting.substring(0, 3) + "p!";
+        System.out.println(greeting);
+
+        String all = String.join(" / ", "S", "M","L", "XL");
+        System.out.println(all);
+
+        int cpCount = greeting.codePointCount(0, greeting.length());
+        System.out.println(cpCount);
+        System.out.println(greeting.length());
     }
 
 }
