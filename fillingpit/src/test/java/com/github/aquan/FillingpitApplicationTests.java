@@ -4,11 +4,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.sound.midi.Soundbank;
+
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -91,6 +95,18 @@ public class FillingpitApplicationTests {
         int cpCount = greeting.codePointCount(0, greeting.length());
         System.out.println(cpCount);
         System.out.println(greeting.length());
+    }
+
+    @Test
+    public void test1(){
+        System.out.println("test1");
+        read_data:
+        for (int i=1; i>10; i++){
+            System.out.println("i = " + i);
+            if (i==5) {
+                break read_data;
+            }
+        }
     }
 
 }
