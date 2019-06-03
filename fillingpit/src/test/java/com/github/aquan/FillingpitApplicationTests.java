@@ -98,15 +98,43 @@ public class FillingpitApplicationTests {
     }
 
     @Test
-    public void test1(){
-        System.out.println("test1");
-        read_data:
-        for (int i=1; i>10; i++){
-            System.out.println("i = " + i);
-            if (i==5) {
-                break read_data;
+    public void breakAndContinueTest(){
+        for (int i=0;i<5;i++){
+            if (i==3) break;
+            System.out.print(i + " ");
+        }
+        for (int i=0;i<5;i++){
+            if (i==3) continue;
+            System.out.print(i + " ");
+        }
+    }
+
+    @Test
+    public void breakLabelTest(){
+        outer:
+        for (int i=0; i<5; i++){
+            for (int j=0; j<6; j++){
+                if (j==4){
+                    break outer;
+                }
+                System.out.println("i = " + i + " j = " + j);
             }
         }
+        System.out.println("outer!");
+    }
+
+    @Test
+    public void continueLabelTest(){
+        outer:
+        for (int i=0; i<5; i++){
+            for (int j=0; j<6; j++){
+                if (j==4){
+                    continue outer;
+                }
+                System.out.println("i = " + i + " j = " + j);
+            }
+        }
+        System.out.println("outer!");
     }
 
 }
