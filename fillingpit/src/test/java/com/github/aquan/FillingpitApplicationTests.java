@@ -10,6 +10,7 @@ import javax.sound.midi.Soundbank;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -135,6 +136,16 @@ public class FillingpitApplicationTests {
             }
         }
         System.out.println("outer!");
+    }
+
+    @Test
+    public void foreachTest() {
+
+        // String[] array = {"Aquan","Meow","miao","haha"};
+        String[] array = Arrays.copyOf(new String[] {"Aquan","Meow","miao","haha"}, 10);
+        for (String string : array) {
+            System.out.println(string);
+        }
     }
 
 }
