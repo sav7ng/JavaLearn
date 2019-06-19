@@ -140,12 +140,39 @@ public class FillingpitApplicationTests {
 
     @Test
     public void foreachTest() {
-
         // String[] array = {"Aquan","Meow","miao","haha"};
         String[] array = Arrays.copyOf(new String[] {"Aquan","Meow","miao","haha"}, 10);
         for (String string : array) {
             System.out.println(string);
         }
+    }
+
+    @Test
+    public void sortTest() {
+        Integer[] array = {1,6,98,23,58,64,88,785,12,15,36,99,-80,0,-5,-3};
+        Arrays.sort(array);
+        for (Integer integer : array) {
+            System.out.print(integer + ",");
+        }
+    }
+
+    @Test
+    public void binarySearchTest() {
+        Integer[] array = {1,6,98,23,58,64,88,785,12,15,36,99,-80,0,-5,-3};
+        // int[] array = new int[] {5,8,6,7,2,9,1,0};
+        //使用binarySearch的前提是数组是有序的
+        Arrays.sort(array);
+        System.out.println("数组是: "+ Arrays.toString(array));
+        System.out.println("6对应的下标是：" + Arrays.binarySearch(array, 6));
+        System.out.println("3对应的下标是：" + Arrays.binarySearch(array, 3));
+        System.out.println("4对应的下标是：" + Arrays.binarySearch(array, 4));
+        System.out.println("9对应的下标是：" + Arrays.binarySearch(array, 9));
+        System.out.println("-1对应的下标是：" + Arrays.binarySearch(array, -1));
+        System.out.println("-5对应的下标是：" + Arrays.binarySearch(array, -5));
+
+
+        System.out.println("0对应的下标是：" + Arrays.binarySearch(array, 0, 16,0));
+        
     }
 
 }
