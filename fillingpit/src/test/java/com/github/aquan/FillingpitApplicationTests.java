@@ -10,6 +10,11 @@ import javax.sound.midi.Soundbank;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -172,7 +177,70 @@ public class FillingpitApplicationTests {
 
 
         System.out.println("0对应的下标是：" + Arrays.binarySearch(array, 0, 16,0));
-        
     }
+
+    @Test
+    public void localDateTest() {
+        // 获取今天的日期
+        LocalDate today = LocalDate.of(2019, 1, 1);
+        System.out.println("today ==> " + today.toString());
+        System.out.println("程序员日每年的第256天 ^_^ ==> " + today.plusDays(255));//程序员日每年的第256天 ^_^
+        System.out.println("withDayOfMonth修改当前的月的天数修改为6天 ==> " + today.withDayOfMonth(6));
+        System.out.println("withDayOfMonth修改当前的月份修改为8月份 ==> " + today.withMonth(8));
+        System.out.println("withDayOfYear修改当年中的天数为第5天 ==> " + today.withDayOfYear(5));
+        System.out.println("withYear修改当前日期的年为指定的2020年 ==> " + today.withYear(2020));
+
+        // 今天是几号
+        int dayofMonth = today.getDayOfMonth();
+        // 今天是周几（返回的是个枚举类型，需要再getValue()）
+        int dayofWeek = today.getDayOfWeek().getValue();
+        // 今年是哪一年
+        int dayofYear = today.getDayOfYear();
+        System.out.println(dayofMonth + "|" + dayofWeek + "|" + dayofYear);
+        // {@code 1}MONDAY
+        // {@code 2}TUESDAY
+        // {@code 3}WEDNESDAY
+        // {@code 4}THURSDAY
+        // {@code 5}FRIDAY
+        // {@code 6}SATURDAY
+        // {@code 7}SUNDAY
+
+
+        LocalDate today2 = LocalDate.parse("2020-09-09");
+        int years = today.until(today2).getYears();
+        int months = today.until(today2).getMonths();
+        int days = today.until(today2).getDays();
+        System.out.println(today + " 和 " + today2 + " 间隔 ==> " + years + " years, " + months + " months and " + days + " days");
+
+        long year = today.until(today2, ChronoUnit.YEARS);
+        long month = today.until(today2, ChronoUnit.MONTHS);
+        long day = today.until(today2, ChronoUnit.DAYS);
+        System.out.println(today + " 和 " + today2 + " 间隔 ==> " + year + "年");
+        System.out.println(today + " 和 " + today2 + " 间隔 ==> " + month + "月");
+        System.out.println(today + " 和 " + today2 + " 间隔 ==> " + day + "天");
+
+        System.out.println(today + " 在 " + today2 + " 之前？ ==> " + today.isBefore(today2));
+        System.out.println(today + " 在 " + today2 + " 之后？ ==> " + today.isAfter(today2));
+
+        System.out.println(today + " 是闰年吗？ ==> " + today.isLeapYear());
+
+
+        // 根据字符串取：
+        LocalDate endOfFeb = LocalDate.parse("2019-10-24");
+        System.out.println(endOfFeb.toString());
+        // 严格按照yyyy-MM-dd验证，02写成2都不行，当然也有一个重载方法允许自己定义格式
+
+        // 取本月第1天：
+        LocalDate firstDayOfThisMonth = today.with(TemporalAdjusters.firstDayOfMonth());
+        // 取本月最后一天，再也不用计算是28，29，30还是31：
+        LocalDate lastDayOfThisMonth = today.with(TemporalAdjusters.lastDayOfMonth());
+        // 取2019年1月第一个周一
+        LocalDate firstMondayOf2019 = LocalDate.parse("2019-01-01").with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+        System.out.println("取本月第1天 ==> " + firstDayOfThisMonth);
+        System.out.println("取本月最后一天，再也不用计算是28，29，30还是31 ==> " + lastDayOfThisMonth);
+        System.out.println("取2019年1月第一个周一 ==> " + firstMondayOf2019);
+
+    }
+
 
 }
