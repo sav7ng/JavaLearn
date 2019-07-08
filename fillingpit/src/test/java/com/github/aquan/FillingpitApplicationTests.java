@@ -5,20 +5,17 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.sound.midi.Soundbank;
-
-import static org.junit.Assert.*;
-
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -313,13 +310,19 @@ public class FillingpitApplicationTests {
 
         // char
         System.out.println("基本类型：char 二进制位数：" + Character.SIZE);
-        System.out.println("包装类：java.lang.Character");
+        System.out.println("包装类：java.lang" +
+                "" +
+                "" +
+                ".Character");
         // 以数值形式而不是字符形式将Character.MIN_VALUE输出到控制台
-        System.out.println("最小值：Character.MIN_VALUE="
-                + (int) Character.MIN_VALUE);
+        System.out.println("最小值：Character.MIN_VALUE=" + (int) Character.MIN_VALUE);
         // 以数值形式而不是字符形式将Character.MAX_VALUE输出到控制台
-        System.out.println("最大值：Character.MAX_VALUE="
-                + (int) Character.MAX_VALUE);
+        System.out.println("最大值：Character.MAX_VALUE=" + (int) Character.MAX_VALUE);
+    }
+
+    @Test
+    public void Test(){
+
     }
 
 }
