@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.InvoiceMapper">
+  <resultMap id="BaseResultMap" type="com.company.project.model.Invoice">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
+    <result column="invoice_date" jdbcType="DATE" property="invoiceDate" />
+    <result column="billing_address" jdbcType="VARCHAR" property="billingAddress" />
+    <result column="billing_city" jdbcType="VARCHAR" property="billingCity" />
+    <result column="billing_state" jdbcType="INTEGER" property="billingState" />
+    <result column="billing_country" jdbcType="VARCHAR" property="billingCountry" />
+    <result column="billing_postalCode" jdbcType="VARCHAR" property="billingPostalcode" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+  </resultMap>
+</mapper>
