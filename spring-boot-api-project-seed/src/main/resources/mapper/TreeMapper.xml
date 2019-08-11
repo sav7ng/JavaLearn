@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.project.dao.TreeMapper">
+<!--    &lt;!&ndash; start 关联查询&ndash;&gt;-->
+<!--    &lt;!&ndash; 得到属于Invoice的数据&ndash;&gt;-->
+<!--    <select id="getInvoiceById" resultMap="rmInvoice">-->
+<!--       select i.*,c.* from invoice i left join customer c on i.customer_id=c.customer_id  where i.invoice_id=#{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash; 得到属于Customer的数据 &ndash;&gt;-->
+<!--    <select id="getCustomerById" resultMap="rmCustomer">-->
+<!--         select i.*,c.* from invoice i left join customer c on i.customer_id=c.customer_id  where i.customer_id=#{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;填充Customer类的数据 &ndash;&gt;-->
+<!--    <resultMap id="rmCustomer" autoMapping="true" type="com.company.project.model.Customer">-->
+<!--        &lt;!&ndash;使用递归关系     Customer类中的 invoices 要输出要删除，不然会造成递归死循环  &ndash;&gt;-->
+<!--        <collection property="invoices" ofType="com.company.project.model.Invoice" resultMap="rmInvoice" autoMapping="true" javaType="java.util.ArrayList"/>-->
+<!--    </resultMap>-->
+
+<!--    &lt;!&ndash;填充 Invoice类 的数据 &ndash;&gt;-->
+<!--    <resultMap id="rmInvoice" autoMapping="true" type="com.company.project.model.Invoice">-->
+<!--        <association property="billingInfo" autoMapping="true" javaType="com.company.project.model.BillingInfo"/>-->
+<!--        <association property="customer" autoMapping="true" resultMap="rmCustomer" javaType="com.company.project.model.Customer"/>-->
+<!--    </resultMap>-->
+<!--    &lt;!&ndash;end 关联查询&ndash;&gt;-->
+
+    <!-- start 嵌套查询-->
+    <select id="getInvoiceById" parameterType="integer" resultMap="rmInvoice">
+       select * from invoice  where invoice_id=#{id}
+    </select>
+
+    <select id="getBillingInfoById" parameterType="int" resultType="com.company.project.model.BillingInfo" >
+       select
+            billing_address,
+            billing_city,
+            billing_country,
+            billing_postalCode,
+            billing_state
+        from invoice where invoice_id=#{id}
+    </select>
+
+    <select id="getCustomerById" resultType="com.company.project.model.Customer" parameterType="int">
+        select c.*,i.* from customer c left  join invoice i on c.customer_id=i.customer_id where i.invoice_id=#{id}
+    </select>
+
+    <resultMap id="rmInvoice" autoMapping="true" type="com.company.project.model.Invoice">
+        <association property="billingInfo" autoMapping="true"  column="invoice_id" select="getBillingInfoById"></association>
+        <collection property="customer" ofType="com.company.project.model.Customer" column="invoice_id" select="getCustomerById"></collection>
+    </resultMap>
+    <!--end 嵌套查询-->
+</mapper>

@@ -1,10 +1,14 @@
 package com.company.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
 
 public class Invoice {
+    @Id
     @Column(name = "invoice_id")
     private Integer invoiceId;
 
@@ -30,6 +34,15 @@ public class Invoice {
 
     @Column(name = "customer_id")
     private Integer customerId;
+
+    @Getter
+    @Setter
+    private Customer customer;
+
+    @Getter
+    @Setter
+    private BillingInfo billingInfo;
+
 
     /**
      * @return invoice_id

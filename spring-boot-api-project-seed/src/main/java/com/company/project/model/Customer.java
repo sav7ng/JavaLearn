@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 
 public class Customer {
+
+    @Id
     @Column(name = "customer_id")
     private Integer customerId;
 
