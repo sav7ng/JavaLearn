@@ -3,6 +3,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.Invoice;
+import com.company.project.service.IUserService;
 import com.company.project.service.TreeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -27,6 +28,9 @@ public class TreeController {
 
     @Autowired
     TreeService treeService;
+
+    @Autowired
+    IUserService iUserService;
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page,
