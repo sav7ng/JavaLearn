@@ -1,6 +1,5 @@
 package com.company.project.configurer;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -1,0 +1,6 @@
+memcache:
+  ip: 127.0.0.1
+  port: 11211
+
+#  schtasks /create /sc onstart /tn memcached /tr "'c:\memcached\memcached.exe' -m 512"
+#  schtasks /delete /tn memcached
