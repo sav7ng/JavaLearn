@@ -1,0 +1,8 @@
+
+esquid:S1192¹"HDefine a constant instead of duplicating this literal "unknown" 5 times.(í¾şèÿÿÿÿÿ
+Dsquid:S1604F"(Make this anonymous inner class a lambda(©šç¤úÿÿÿÿ
+Vsquid:S4719=":Replace Charset.forName() call with StandardCharsets.UTF_8(Üë¨ùÿÿÿÿ
+vsquid:S2293¦"YReplace the type specification in this constructor call with the diamond operator ("<>").(–¤“òşÿÿÿÿ
+^squid:S3027É"FPut single-quotes around ',' to use the faster "indexOf(char)" method.(ú Íá
+^squid:S3027Ê"FPut single-quotes around ',' to use the faster "indexOf(char)" method.(¹Ë­Ù
+gsquid:CommentedOutCodeLinei"<This block of commented-out lines of code should be removed.(²æ´Öıÿÿÿÿ
